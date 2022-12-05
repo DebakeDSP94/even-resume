@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Stuart Wilson</title>
+      <meta name="description" content="Stuart grew up in Indonesia with a few years in London and Sydney in between the 3 times he lived in Jakarta.  He attended Jakarta International School before going to Stephen F. Austin State University where he pursued a major in Computer Science prior to graduating with a Bachelors of Environmental Science with a Math minor. He has had a diverse work history in sales, customer service, and team leadership.  He has held licences and certifications in several fields. He attempted to start a business before deciding to make a return to computer scence and specialize in web development through The Odin Project.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap">
+    <style>:root {
+  color-scheme: light dark;
+
+  --color-background: #ffffff; /* White */
+  --color-muted: #f3f4f5; /* Light Gray 200 */
+  --color-primary: #191e23; /* Dark Gray 900 */
+  --color-secondary: #6c7781; /* Dark Gray 300 */
+  --color-accent: #ffb900; /* Accent Yellow */
+  --color-link: #46b450; /* Accent Green */
+
+  --scale-ratio: 1.25;
+  --scale0: 1rem;
+  --scale1: calc(var(--scale0) * var(--scale-ratio));
+  --scale2: calc(var(--scale1) * var(--scale-ratio));
+  --scale3: calc(var(--scale2) * var(--scale-ratio));
+  --scale4: calc(var(--scale3) * var(--scale-ratio));
+  --scale5: calc(var(--scale4) * var(--scale-ratio));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #191e23; /* Dark Gray 900 */
+    --color-muted: #23282d; /* Dark Gray 800 */
+    --color-primary: #fbfbfc; /* Light Gray 100 */
+    --color-secondary: #ccd0d4; /* Light Gray 700 */
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-primary);
+  display: grid;
+  font: 1em/1.5 Lato, sans-serif;
+  gap: 2em;
+  grid-template-columns:
+    [full-start]
+    1fr
+    [main-start side-start]
+    minmax(min-content, 12em)
+    [side-end content-start]
+    minmax(min-content, 36em)
+    [main-end content-end]
+    1fr
+    [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 4em;
+}
+
+body::before {
+  content: '';
+  grid-column: full;
+  grid-row: content;
+}
+
+ol,
+ul {
+  padding-left: 1em;
+}
+
+:not(.icon-list, .tag-list) > li + li {
+  margin-top: 0.4em;
+}
+
+li::marker,
+.network {
+  color: var(--color-secondary);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:focus,
+a:hover {
+  color: var(--color-accent);
+}
+
+h1,
+h2,
+h3,
+h5 {
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--scale5);
+}
+
+h2 {
+  color: var(--color-secondary);
+  font-size: var(--scale4);
+}
+
+h3 {
+  color: var(--color-accent);
+  font-size: var(--scale3);
+  grid-column: side;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: var(--scale2);
+}
+
+h5 {
+  font-size: var(--scale1);
+}
+
+h6 {
+  font-size: var(--scale0);
+}
+
+blockquote {
+  border-left: 0.2em solid var(--color-muted);
+  padding-left: 1em;
+}
+
+cite {
+  color: var(--color-secondary);
+  font-style: inherit;
+}
+
+cite::before {
+  content: '— ';
+}
+
+svg {
+  margin-right: 0.2em;
+  vertical-align: -0.2em;
+}
+
+.masthead {
+  background: var(--color-muted);
+  display: inherit;
+  gap: inherit;
+  grid-column: full;
+  grid-template-columns: inherit;
+  padding: 4em 0;
+  text-align: center;
+}
+
+.masthead > *,
+section {
+  grid-column: main;
+}
+
+.masthead > img {
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 12em;
+}
+
+article > * + *,
+blockquote > * + * {
+  margin-top: 0.6em;
+}
+
+.meta {
+  color: var(--color-secondary);
+}
+
+.stack {
+  display: grid;
+  gap: 1.5em;
+}
+
+.icon-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1em;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.grid-list {
+  display: grid;
+  gap: 1em;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  list-style: none;
+  padding: 0;
+}
+
+.tag-list > li {
+  background: var(--color-muted);
+  border-radius: 0.2em;
+  padding: 0.2em 0.6em;
+}
+
+.bullet-item:not(:first-child)::before {
+  content: '· ';
+  margin: 0 0.2em;
+}
+
+@media print, (min-width: 48em) {
+  h3 {
+    text-align: right;
+    margin-bottom: inherit;
+  }
+
+  .masthead {
+    text-align: inherit;
+  }
+
+  .masthead > *,
+  section {
+    grid-column: content;
+  }
+
+  .masthead img {
+    grid-column: side;
+    grid-row: span 2;
+    max-width: 100%;
+  }
+
+  section {
+    display: contents;
+  }
+
+  .icon-list {
+    flex-direction: column;
+  }
+
+  .grid-list {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc((100% - 1em) / 2), 1fr)
+    );
+  }
+}
+</style>
+  </head>
+  <body>
+      <header class="masthead">
+          <img src="images/profile.jpg" alt="">
+        <div>
+            <h1>Stuart Wilson</h1>
+            <h2>Ruby on Rails Developer</h2>
+        </div>
+          <article>
+            <p>Stuart grew up in Indonesia with a few years in London and Sydney in between the 3 times he lived in Jakarta.  He attended Jakarta International School before going to Stephen F. Austin State University where he pursued a major in Computer Science prior to graduating with a Bachelors of Environmental Science with a Math minor. He has had a diverse work history in sales, customer service, and team leadership.  He has held licences and certifications in several fields. He attempted to start a business before deciding to make a return to computer scence and specialize in web development through The Odin Project.</p>
+          </article>
+        <ul class="icon-list">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Montgomery, United States
+              </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:stuartwilson94@gmail.com">stuartwilson94@gmail.com</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href="tel:9365372399">(936) 537-2399</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <a href="https://stuartlwilson.dev">stuartlwilson.dev</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                  <a href="https://twitter.com/StuartW64954805">StuartW64954805</a>
+                <span class="network">(Twitter)</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  <a href="https://www.linkedin.com/in/stuart-wilson-72b61a10/">Stuart Wilson</a>
+                <span class="network">(LinkedIn)</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <a href="https://github.com/DebakeDSP94">DebakeDSP94</a>
+                <span class="network">(Github)</span>
+            </li>
+        </ul>
+      </header>
+
+      <section id="work">
+        <h3>Work</h3>
+        <div class="stack">
+            <article>
+              <header>
+                <h4>CEO/President</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="http://chairweasel.com">Chair Weasel LLC</a></strong>
+                      <span class="bullet-item">Attempted startup personal business</span>
+                  </div>
+                  <div>
+                    <time datetime="2018-03-01">Mar 2018</time> –
+                    <time datetime="2022-12-01">Dec 2022</time>
+                  </div>
+                    <div>Montgomery, TX</div>
+                </div>
+              </header>
+                <p>Chair weasel is a small business developing a product to make it easier to transport your camping chair to sports events and other venues.</p>
+                <ul>
+                    <li><p>Self taught CAD and 3D-printing.</p></li>
+                    <li><p>Research all aspects of product development.</p></li>
+                    <li><p>Wrote a provisional patent for designed product.</p></li>
+                    <li><p>Designed functionally optimized product over many iterations using printed parts and parts from prototyping services.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Loan Officer</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://longbridge-financial.com/">Longbridge Financial, LLC</a></strong>
+                      <span class="bullet-item">Reverse Mortgage Origination</span>
+                  </div>
+                  <div>
+                    <time datetime="2016-10-01">Oct 2016</time> –
+                    <time datetime="2018-03-01">Mar 2018</time>
+                  </div>
+                    <div>Houston, TX</div>
+                </div>
+              </header>
+                <p>Handle all aspects of loan origination from initial contact of the customer through to the closing.</p>
+                <ul>
+                    <li><p>Worked on special teams due to high performance despite being newest member of the company.</p></li>
+                    <li><p>3rd highest in originations in first year.</p></li>
+                    <li><p>Excellent grasp of underwriting guidelines and procedures.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Sales Representative</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://uretek-gulfcoast.com/">Uretek ICR Gulf Coast</a></strong>
+                      <span class="bullet-item">Industrial, Commercial &amp; Residential concrete lifting and foundation repair sales</span>
+                  </div>
+                  <div>
+                    <time datetime="2013-09-01">Sep 2013</time> –
+                    <time datetime="2016-10-01">Oct 2016</time>
+                  </div>
+                    <div>Houston, TX</div>
+                </div>
+              </header>
+                <p>Go on four sales appointments per day, take measurements, provide a proposal for repairs.</p>
+                <ul>
+                    <li><p>Create proposals for repairs in residential structures.</p></li>
+                    <li><p>Meet with facility management and create proposal for repairs in commercial and industrial setting.</p></li>
+                    <li><p>Networked with engineers and municipal infrastructure managers.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Team Leader</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://complianceresourcesinc.com/">Complience Resources Inc</a></strong>
+                      <span class="bullet-item">Field environmental stormwater inspections</span>
+                  </div>
+                  <div>
+                    <time datetime="2006-04-01">Apr 2006</time> –
+                    <time datetime="2013-06-01">Jun 2013</time>
+                  </div>
+                    <div>Katy, TX</div>
+                </div>
+              </header>
+                <p>Lead team of 6 inspectors, and performed field environmental inspections and audits.</p>
+                <ul>
+                    <li><p>CESSWI certified.</p></li>
+                    <li><p>Conduct weekly site inspections of construction sites.</p></li>
+                    <li><p>Assist manager in yearly budget and operations plans.</p></li>
+                    <li><p>Perform regular reviews of team members and QC.</p></li>
+                    <li><p>Train new team members and provide orientation.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Loan Officer</h4>
+                <div class="meta">
+                  <div>
+                    <strong>Self at Andora Mortgage Group</strong>
+                      <span class="bullet-item">Self Employed Mortgage Loan Officer</span>
+                  </div>
+                  <div>
+                    <time datetime="2005-01-01">Jan 2005</time> –
+                    <time datetime="2006-04-01">Apr 2006</time>
+                  </div>
+                    <div>Shenandoah, TX</div>
+                </div>
+              </header>
+                <p>Self employed 100% commission loan officer.</p>
+                <ul>
+                    <li><p>Acquired leads through online lead sources at own expense.</p></li>
+                    <li><p>Marketed and networked with realtors and other sources.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Mortgage Loan Officer</h4>
+                <div class="meta">
+                  <div>
+                    <strong>Oak Street Mortgage</strong>
+                      <span class="bullet-item">Mortgage Originations</span>
+                  </div>
+                  <div>
+                    <time datetime="2004-10-01">Oct 2004</time> –
+                    <time datetime="2005-12-01">Dec 2005</time>
+                  </div>
+                    <div>The Woodlands, TX</div>
+                </div>
+              </header>
+                <p>Licensed mortgage loan Officer.</p>
+                <ul>
+                    <li><p>Opened a branch for this company along with manager and teammates from previous mortgage company.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Mortgage Loan Officer</h4>
+                <div class="meta">
+                  <div>
+                    <strong>Axiom Financial Services</strong>
+                      <span class="bullet-item">Mortgage Originations</span>
+                  </div>
+                  <div>
+                    <time datetime="2003-06-01">Jun 2003</time> –
+                    <time datetime="2004-10-01">Oct 2004</time>
+                  </div>
+                    <div>The Woodlands, TX</div>
+                </div>
+              </header>
+                <p>Licensed Mortgage Loan Officer.</p>
+                <ul>
+                    <li><p>We took over this branch as a team after previous team left.</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Mortgage Loan Officer</h4>
+                <div class="meta">
+                  <div>
+                    <strong>Conseco Financial Services</strong>
+                      <span class="bullet-item">Mortgage Originations</span>
+                  </div>
+                  <div>
+                    <time datetime="2002-07-01">Jul 2002</time> –
+                    <time datetime="2003-04-01">Apr 2003</time>
+                  </div>
+                    <div>The Woodlands, TX</div>
+                </div>
+              </header>
+                <p>Licensed Mortgage Loan Officer.</p>
+                <ul>
+                    <li><p>Mortgage refinance sales and customer service</p></li>
+                    <li><p>Conseco became the 3rd largest bankruptcy at the time behind Enron and Worldcom</p></li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <h4>Rep 5 / Associate Development Specialist</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://www.invesco.com">Aim Mutual Funds</a></strong>
+                      <span class="bullet-item">Series 6 licensed customer service</span>
+                  </div>
+                  <div>
+                    <time datetime="1999-10-01">Oct 1999</time> –
+                    <time datetime="2002-05-01">May 2002</time>
+                  </div>
+                    <div>Austin, TX</div>
+                </div>
+              </header>
+                <p>Top level customer service and processing of accounts.</p>
+                <ul>
+                    <li><p>Associate Development Specialist role - All new people would sit with us for a few weeks for mentoring and orientation after training, and we would provide an assessment to their future supervisors of their strengths.</p></li>
+                    <li><p>Participated in many teams on update of the transfer agency system.</p></li>
+                </ul>
+            </article>
+        </div>
+      </section>
+      <section id="education">
+        <h3>Education</h3>
+        <div class="stack">
+            <article>
+              <header>
+                <h4><a href="https://www.sfasu.edu/">Stephen F. Austin State University</a></h4>
+                <div class="meta">
+                    <strong>Environmental Science</strong>
+                  <div>
+                    <time datetime="1992-09-01">Sep 1992</time> –
+                    <time datetime="1999-06-01">Jun 1999</time>
+                  </div>
+                </div>
+              </header>
+                <p>Bachelor</p>
+                <h5>Courses</h5>
+                <ul>
+                    <li><p>Math minor</p></li>
+                    <li><p>Fortran, COBOl, BASIC, Pascal, C, C++, Assembly Language, Machine Language, Data Structures and Algorithms</p></li>
+                </ul>
+            </article>
+        </div>
+      </section>
+      <section id="projects">
+        <h3>Projects</h3>
+        <div class="stack">
+            <article>
+              <header>
+                <h4><a href="https://stuartlwilson.dev">Portfolio Website</a></h4>
+                <div class="meta">
+                  <div>
+                      <strong>Designer</strong>
+                      at <strong>Portfolio</strong>
+                  </div>
+                  <div>
+                    <time datetime="2022-08-01">Aug 2022</time> –
+                    <time datetime="2022-11-15">Nov 2022</time>
+                  </div>
+                </div>
+              </header>
+                <p>A portfolio website in Rails 7 on Heroku using Bootstrap</p>
+                <ul>
+                    <li><p>Showcases other projects created.</p></li>
+                    <li><p>Using modern technologies such as Rails  7, Stimulus, ActiveStorage direct upload, Amazon S3 storage</p></li>
+                </ul>
+            </article>
+        </div>
+      </section>
+      <section id="skills">
+        <h3>Skills</h3>
+        <div class="grid-list">
+            <div>
+                <h4>Web Development</h4>
+                <ul class="tag-list">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>Javascript</li>
+                    <li>Ruby</li>
+                    <li>Ruby on Rails</li>
+                </ul>
+            </div>
+        </div>
+      </section>
+      <section id="languages">
+        <h3>Languages</h3>
+        <div class="grid-list">
+            <div>
+                <h4>English</h4>
+              Native speaker
+            </div>
+        </div>
+      </section>
+      <section id="interests">
+        <h3>Interests</h3>
+        <div class="grid-list">
+            <div>
+                <h4>RC airplanes</h4>
+                <ul class="tag-list">
+                    <li>Electrics</li>
+                    <li>Motor rewinding</li>
+                    <li>3-D Flying</li>
+                    <li>Scratch Building</li>
+                </ul>
+            </div>
+        </div>
+      </section>
+      <section id="references">
+        <h3>References</h3>
+        <div class="stack">
+              <blockquote>
+                <p>References available upon request.</p>
+                  <p>
+                    <cite></cite>
+                  </p>
+              </blockquote>
+        </div>
+      </section>
+  </body>
+</html>
